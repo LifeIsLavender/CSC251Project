@@ -1,62 +1,94 @@
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Project_Shalena_Mumford
 {
-   public static void main(String[] args)
+   public static void main(String[] args) throws IOException
    {
-      int policyNumber;
+      String policyNumber;
       String providerName;
       String holderFirstName;
       String holderLastName;
-      int holderAge;
+      String holderAge;
       String smokingStatus;
-      double holderHeight;
-      double holderWeight;
-      
+      String holderHeight;
+      String holderWeight;
+      int num;
+      int age;
+      double height;
+      double weight;
+       
       Scanner keyboard = new Scanner(System.in);
       
-      System.out.println("Please enter the Policy Number.");
-      policyNumber = keyboard.nextInt();
+      ArrayList<Policy> policyInfo = new ArrayList<>();
+      ArrayList<String> smokers = new ArrayList<>();
       
-      keyboard.nextLine();
+      File userInfo = new File("PolicyInformation.txt");
+      Scanner inputFile = new Scanner(userInfo);
       
-      System.out.println("Please enter the Provider Name.");
-      providerName = keyboard.nextLine();
+      while (inputFile.hasNext())
+      {
+         policyNumber = inputFile.nextLine();
+         
+         providerName = inputFile.nextLine();
       
-      System.out.println("Please enter the Policyholder's First Name.");
-      holderFirstName = keyboard.nextLine();
-      
-      System.out.println("Please enter the Policyholder's Last Name.");
-      holderLastName = keyboard.nextLine();
-      
-      System.out.println("Please enter the Policyholder's Age.");
-      holderAge = keyboard.nextInt();
-      
-      keyboard.nextLine();
+         holderFirstName = inputFile.nextLine();
+         
+         holderLastName = inputFile.nextLine();
+         
+         holderAge = inputFile.nextLine();
+         
+         smokingStatus = inputFile.nextLine();
             
-      System.out.println("Please enter the Policyholder's Smoking Status. (smoker/non-smoker)");
-      smokingStatus = keyboard.nextLine();
+         holderHeight = inputFile.nextLine();
       
-      System.out.println("Please enter the Policyholder's Height (in inches).");
-      holderHeight = keyboard.nextDouble();
+         holderWeight = inputFile.nextLine();
+         
+         if (inputFile.hasNext())
+         {
+            String space = inputFile.nextLine();
+         }
+         
+         num = Integer.parseInt(policyNumber);
+         age = Integer.parseInt(holderAge);
+         height = Double.parseDouble(holderHeight);
+         weight = Double.parseDouble(holderWeight);
+         
+         smokers.add(smokingStatus);
+         policyInfo.add(new Policy(num, providerName, holderFirstName, holderLastName, age, smokingStatus, height, weight));
+      }
       
-      System.out.println("Please enter the Policyholder's Weight (in pounds).");
-      holderWeight = keyboard.nextDouble();
+      inputFile.close();
       
-      System.out.println("Main says: " + smokingStatus);
+      int count = 0;
       
-      Policy PolicyPrice = new Policy(policyNumber, providerName, holderFirstName, holderLastName, holderAge, smokingStatus, holderHeight, holderWeight);
-      
-      System.out.println();
-      System.out.println("Policy Number: " + PolicyPrice.getPolicyNumber());
-      System.out.println("Provider Name: " + PolicyPrice.getProviderName());
-      System.out.println("Policyholder's First Name: " + PolicyPrice.getFirstName());
-      System.out.println("Policyholder's Last Name: " + PolicyPrice.getLastName());
-      System.out.println("Policyholder's Age: " + PolicyPrice.getAge());
-      System.out.println("Policyholder's Smoking Status: " + PolicyPrice.getStatus());
-      System.out.printf("Policyholder's Height: %.1f\n", PolicyPrice.getHeight());
-      System.out.printf("Policyholder's Weight: %.1f\n", PolicyPrice.getWeight());
-      System.out.printf("Policyholder's BMI: %.2f\n", PolicyPrice.getBMI());
-      System.out.printf("Policy Price $%.2f\n", PolicyPrice.getInsurancePrice());
-   }
+      for (int index = 0; index < smokers.size(); index++)
+         {
+            if (smokers.get(index).equals("smoker"))
+               count++;
+         }
+         
+      int non = smokers.size() - count;
+         
+      for (int index = 0; index < policyInfo.size(); index++)
+         {
+            System.out.println();
+            System.out.println("Policy Number: " + policyInfo.get(index).getPolicyNumber());
+            System.out.println("Provider Name: " + policyInfo.get(index).getProviderName());
+            System.out.println("Policyholder's First Name: " + policyInfo.get(index).getFirstName());
+            System.out.println("Policyholder's Last Name: " + policyInfo.get(index).getLastName());
+            System.out.println("Policyholder's Age: " + policyInfo.get(index).getAge());
+            System.out.println("Policyholder's Smoking Status: " + policyInfo.get(index).getStatus());
+            System.out.printf("Policyholder's Height: %.1f\n", policyInfo.get(index).getHeight());
+            System.out.printf("Policyholder's Weight: %.1f\n", policyInfo.get(index).getWeight());
+            System.out.printf("Policyholder's BMI: %.2f\n", policyInfo.get(index).getBMI());
+            System.out.printf("Policy Price $%.2f\n", policyInfo.get(index).getInsurancePrice());
+    }
+    
+    System.out.println();
+    System.out.println("The number of policies with a smoker is : " + count);
+    System.out.println("The number of policies with a non-smoker is : " + non);
+    
+     
+    }
 }
