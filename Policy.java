@@ -69,5 +69,18 @@ public class Policy
    {
       return providerName;
    }
+
+/**
+   toString method
+   @ return prints the insurance data
+*/
+   
+   public String toString()
+   {
+      String str = "Policy Number: " + this.getPolicyNumber() +
+                   "\nProvider Name: " + this.getProviderName();
+      
+      return str;
+   }
 }
       
