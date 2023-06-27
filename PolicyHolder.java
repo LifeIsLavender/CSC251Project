@@ -194,4 +194,23 @@ public class PolicyHolder
          
       return totalPrice;
    }
+
+/**
+   toString method
+   @ return prints the policy holder's data
+*/ 
+   
+   public String toString()
+   {
+      String str = "Policyholder's First Name: " + this.getgetFirstName() +
+                   "\nPolicyholder's Last Name: " + this.getLastName(); + 
+                   "\nPolicyholder's Age: " + this.getAge() +
+                   "\nPolicyholder's Smoking Status: " + this.getStatus() + 
+                   "\nPolicyholder's Height: " + this.getHeight() + 
+                   "\nPolicyHolder's Weight: " + this.getWeight() + 
+                   "\nPolicyholder's BMI: " + this.getBMI() +
+                   "\nPolicy Price $" + this.getInsurancePrice();
+      
+      return str;
+   }
 }
