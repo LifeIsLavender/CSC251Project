@@ -35,7 +35,7 @@ public class PolicyHolder
    @param weight equals policy holder's weight
 */
    
-   public Policy(String first, String last, int age, String status, double height, double weight)
+   public PolicyHolder(String first, String last, int age, String status, double height, double weight)
    {
       holderFirstName = first;
       holderLastName = last;
@@ -43,6 +43,21 @@ public class PolicyHolder
       smokingStatus = status;
       holderHeight = height;
       holderWeight = weight;
+   }
+   
+/**
+   Constructor
+   Makes copy of PolicyHolder object
+*/   
+   
+   public PolicyHolder(PolicyHolder object2)
+   {
+      holderFirstName = object2.holderFirstName;
+      holderLastName = object2.holderLastName;
+      holderAge = object2.holderAge;
+      smokingStatus = object2.smokingStatus;
+      holderHeight = object2.holderHeight;
+      holderWeight = object2.holderWeight;
    }
  
 /**
@@ -202,14 +217,14 @@ public class PolicyHolder
    
    public String toString()
    {
-      String str = "Policyholder's First Name: " + this.getgetFirstName() +
-                   "\nPolicyholder's Last Name: " + this.getLastName(); + 
+      String str = "Policyholder's First Name: " + this.getFirstName() +
+                   "\nPolicyholder's Last Name: " + this.getLastName() + 
                    "\nPolicyholder's Age: " + this.getAge() +
                    "\nPolicyholder's Smoking Status: " + this.getStatus() + 
                    "\nPolicyholder's Height: " + this.getHeight() + 
                    "\nPolicyHolder's Weight: " + this.getWeight() + 
-                   "\nPolicyholder's BMI: " + this.getBMI() +
-                   "\nPolicy Price $" + this.getInsurancePrice();
+                   "\nPolicyholder's BMI: " + String.format("%.2f", this.getBMI()) +
+                   "\nPolicy Price " + String.format("$%.2f", this.getInsurancePrice());
       
       return str;
    }

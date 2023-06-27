@@ -6,7 +6,8 @@ public class Policy
 {
    private int policyNumber;
    private String providerName;
-   private static int instanceCount = 0
+   private PolicyHolder policyHolder;
+   private static int instanceCount = 0;
 
    
 /** 
@@ -16,8 +17,8 @@ public class Policy
    public Policy()
    {
        policyNumber = 1;
-       providerName = "";
-       instanceCount++;
+       providerName = "";      
+       
    }
    
 /**
@@ -26,10 +27,12 @@ public class Policy
    @param provider equals policy provider
 */
 
-   public Policy(int num, String provider)
+   public Policy(int num, String provider, PolicyHolder holder)
    {
       policyNumber = num;
       providerName = provider;
+      policyHolder = new PolicyHolder(holder);
+      instanceCount++;
    }
    
    
@@ -92,7 +95,8 @@ public class Policy
    public String toString()
    {
       String str = "Policy Number: " + this.getPolicyNumber() +
-                   "\nProvider Name: " + this.getProviderName();
+                   "\nProvider Name: " + this.getProviderName() +
+                   policyHolder.toString();
       
       return str;
    }
