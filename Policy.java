@@ -6,6 +6,7 @@ public class Policy
 {
    private int policyNumber;
    private String providerName;
+   private static int instanceCount = 0
 
    
 /** 
@@ -16,6 +17,7 @@ public class Policy
    {
        policyNumber = 1;
        providerName = "";
+       instanceCount++;
    }
    
 /**
@@ -29,6 +31,8 @@ public class Policy
       policyNumber = num;
       providerName = provider;
    }
+   
+   
    
 /**
    The setPolicyNumber method sets the user's policy number
@@ -49,6 +53,16 @@ public class Policy
    {
       providerName = provider;
    }
+
+/**
+   getInstanceCount method
+   @ return the count of Policy objects created
+*/
+
+   public int getInstanceCount()
+   {
+      return instanceCount;
+   }  
    
 /**
    getPolicy method
